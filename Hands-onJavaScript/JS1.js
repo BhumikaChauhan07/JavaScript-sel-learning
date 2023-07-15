@@ -54,6 +54,59 @@ console.log(sibname[3])
 console.log(sibname.length)       // gives length or size of a string, spaces are considered as character if they are part of the string
 console.log(sibname.length - 2)   // returns secondlast index 
 
+//Remember that strings are immutable so everytime you apply a function to it or change it a new string is created
+// cutting out leading and trailing spaces in a string using trim() function
+let fruit = "    Apple    "
+console.log(fruit.length + fruit); 
+fruit = fruit.trim();                // here fruit.trim() creates a new string and the fruit varaibale is now assigned the value of new string. Another string variable could aslo be made to strore this new string
+console.log(fruit.length + fruit);
+//changing all characters to uppercase using toUpperCase() function
+console.log(fruit.toUpperCase());    // this again creates a new new string which can either we stored in aseparate string variable or made as new value for the existing variable
+//changing all characters to lowercase using toLowerCase() function
+console.log(fruit.toLowerCase());
+//slicing in strings
+console.log(fruit.slice(1,4));      // the index before ',' is included while the index after ',' is not included. String will be sliced from index 2 to 3
+console.log(fruit.slice(2,-1));     // starts from index 2 and stops at second last (-1 indicates last)
+console.log(fruit.slice(0));        // starts from index 0 till the last index
+
+//primitive datatypes in JavaScript: strings, numbers(2,3,4.5), booleans, undefined, null, BigInt, Symbol
+//Checking type of a variable 
+let age = 20;
+console.log(typeof(age));
+console.log(typeof fruit);           // It id not necessary to use () for typeof
+
+//converting number to string
+console.log(typeof(age));
+console.log(typeof(age+""));        // concatenating a number with a string leads to conversion of no. to a string and then concatenating
+console.log(typeof String(age));    // using String() function
+//converting a string(holding numeric characters) to a number
+console.log(typeof "34");
+console.log(typeof +"34");         // adding a + in front of string makes it a number
+console.log(typeof Number("34"))   // using Number() function
+
+// String concatenation
+console.log("Bhumika " + "Chauhan");    // concatenating strings directly
+let string1 = "Bhumika ";
+let string2 = "Chauhan";
+console.log(string1 + string2);        // concatenating using string variables
+let string3 ="17";
+let string4 ="10";
+console.log(string3+string4);         
+console.log(+string3 + +string4);
+
+// template strings - these are used to create a template of a frequently used string within which different values can be filled
+let myName = "Bhumika Chauhan";
+let myAge = 20;
+let templateString = `My name is ${myName} and my age is ${myAge}`;   // `` are used to denote that its is a template string and ${} is used to fill different values
+console.log(templateString);  
+
+// undefined datatype - when we declare a variable but do not assign value to it, there is no specific type od=f data that it stores so it's given the undefined type
+let A;
+var B;
+console.log(typeof A);
+console.log(typeof B);
+    // const C;                  // This does not work with const as it is mandatory to assihn a value to the constamt
+
 
 
 
