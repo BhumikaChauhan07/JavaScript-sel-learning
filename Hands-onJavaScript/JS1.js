@@ -12,11 +12,11 @@ Name ="Chauhan"      // if here var keyword was used, then it would not create a
 console.log(Name);
 
 
-var value = 1
+var value = 3;
 console.log(value);
 console.log(value +4);
 console.log(value *2**2); 
-
+console.log(value%2);         //remainder
 
 // variables can be created without using var keyword as well
     //Firstname = "khushi";         //This will produce an error after using strict mode
@@ -106,8 +106,83 @@ var B;
 console.log(typeof A);
 console.log(typeof B);
     // const C;                  // This does not work with const as it is mandatory to assihn a value to the constamt
+    // console.log(C);
 
+// Null datatypes- This can be used when one has to create variable but is not sure of the value as of now
+let myvar = null;
+console.log(myvar, typeof myvar);    // there's a bug in JS that shows typeof null as object instead of null. Not fixed yet because several frameworks are alredy built dealing this problem and will lead to inconvinience
+myvar = " cahnged from null to string";
+console.log(myvar);
 
+//Max safe integer - determines the limit of integers
+console.log(Number.MAX_SAFE_integer);   // Earlier the limit of Number datatype used to be 9007199254748991 but now it shows undefined
+
+// BigInt datatype(recent datatype)
+let num1 = 12n;                          // comes with an increased max. limit
+console.log(num1, typeof num1);
+let num2 = BigInt(10);                  // using BigInt constructor
+let num3 = 4;
+console.log(num2, typeof num2);
+console.log(num1 + num2);
+    //console.log(num1 +num3);          // gives error as implicit type conversion does not occur when BigInt is used with other datattypes
+console.log(num1 + BigInt(num3));
+
+//Boolean datatypes
+A = true;
+console.log(typeof true);
+console.log(typeof false);
+console.log(A, typeof A);
+
+//Comparison operators- returns boolean values
+num1 = 40;
+num2 = 35;
+console.log(num1<num2);
+console.log(num1<=num2);
+console.log(num1>num2);
+console.log(num1>=num2);
+// == vs ===
+num1 = "7";
+num2 = 7;
+console.log(num1==num2);        // returns true because == checks for value only and not datatype
+console.log(num1===num2)        // checks for both matching value as well as matching datatype
+// != vs !==
+console.log(num1!=num2);        // returns false as num1 and num2 are same by value (again datatype is not checked)
+console.log(num1!==num2);       // returns true as it checks for value as well as datatype and finds that num1 is not equal to num2
+
+// if else condition
+age = 17;
+if(age>18)                      // condition that returns true or false
+{console.log("Adult");}         // if block runs when if condition is true 
+else
+{console.log("Minor");}         // if else blocks end here
+if(age=== 17)                   // new if else block
+{console.log("17");}
+else
+{comsole.log("Not 17");}
+
+// Truthy and falsy values
+// Falsy values - "", null, undefined, 0: these are the values that if passed in condition block, return a false 
+// apart from truthy values rest are falsy values
+let var1;
+if(var1)
+{console.log("it is not a falsy value")}
+else
+{console.log("It is a falsy value")}
+
+// ternary operator or conditional operator-   <>?<>:<>  in place of first <> condition is written, in place of second <> execution statements for a true value of condition, in place of third <> execution statements if consdition is false
+age = 8;
+let drink = age>=8?"coffee":"milk";             // here either coffee or milk will be stired in drink depending on the given condition
+console.log(drink);
+
+// and, or operators
+if(true && false)                     // true if all condition are true else false
+{console.log(true);}
+else
+{console.log(false);}
+if(true || false)                      // false if all conditions  are false else true
+{console.log(true);}
+else
+{console.log(false);}
 
 
 
