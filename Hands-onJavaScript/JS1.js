@@ -184,9 +184,55 @@ if(true || false)                      // false if all conditions  are false els
 else
 {console.log(false);}
 
+// taking input from user using prompt() function
+    //let userGuess = prompt("Guess a number: ");   // promt() allows to take user input along with promt or pop up with a text message on the webpage. 
+    // console.log(userGuess);                       // console.log() displays on console and not the webpage itself
+    // console.log(typeof userGuess);                //Also it stores the input in the form of string always
+    // userGuess = +userGuess;                       // Either this can be done or + can be used directly in front of promt()
+    // console.log(typeof userGuess);
 
+// nested if-else
+    // let winnerNumber = 12;
+    // if(userGuess === winnerNumber)
+    // {console.log("Right guess!");}
+    // else
+    // {
+    //     if(userGuess > winnerNumber)                      // nested if-else
+    //     {console.log("Guessed a bigger number");}
+    //     else
+    //     {console.log("Guessed a smaller number");}
+    // }
 
+// else if ladder
+let temp = 24;
+if(temp<0)                               // control jumps out of the else if ladder after executing body of a satisfied condition 
+{console.log("Freezing cold");}
+else if(temp<=16 && temp>0)
+{console.log("cold");}
+else if(temp<=25 && temp>16)
+{console.log("pleasant");}
+else if(temp<=30&& temp>25)
+{console.log("warm");}
+else
+{console.log("Hot");}
 
-
-
-
+//switch staement
+let day = 2;
+switch(day)                           // switch does not stop jumping to next case by itself even when the correct case is found, thus jump statement break is used
+{
+    case 0: console.log("Sunday");
+            break;    
+    case 1: console.log("Monday");
+            break;   
+    case 2: console.log("Tuesday");
+            break;  
+    case 3: console.log("Wednesday");
+            break;    
+    case 4: console.log("Thursday");
+            break;     
+    case 5: console.log("Friday");
+            break;       
+    case 6: console.log("Saturday");
+            break; 
+    default: console.log("Wrong number");
+}
