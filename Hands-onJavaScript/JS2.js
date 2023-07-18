@@ -42,3 +42,85 @@ do
 {   console.log(k); 
 }while(k!==55)
 
+// Arrays - ordered(indexed) collection of data stored contiguously. Arrays in javascript can store elements of any datatype within a single array, the elements need not to be of same datatypes
+let arr = [1,2,3,4, "blue", null];
+console.log(arr);
+console.log(arr[0], arr[4]);
+arr[3] = 6.7;                       // arrays are mutable
+console.log(arr);
+console.log(typeof arr);           // arrays are reference types. All reference types are objects thus arrays are objects
+// since all reference types are object in order to know that a particular object is an array, Array.isArray() can be used
+console.log(Array.isArray(arr));
+// reference types are mutable which means the changes are made in original object
+// array push() - adds an element at the end of array. Note that it does not create a new array but adds in the original array. This is because it is a reference type (primitive types are immutable)
+arr.push(3);
+console.log(arr);
+// array pop() - removes last element from original array and returns it
+ a = arr.pop();             // it returns the popped element which can be strored into a variable
+ console.log(a, arr);
+// array unshift() - adds element in start of array
+arr.unshift("yellow");
+console.log(arr);
+// array shift() - removes and returns element from the start of array
+a = arr.shift();
+console.log(a, arr);
+// push and pop are faster than shift, unshift because theuy remove element from the last. Shift, unshift will have to change indexing for the entire array 
+
+// primitive vs reference type
+// primitive datatypes are stored in stack( as they don't take much space and can be stored easily in a stack) along with values, each variable of primitive type are given a separate section in stack whether they had their values copied from other variables or not
+num1 = 12;
+num2 = num1;
+console.log(num1, num2);
+console.log(num1===num2);
+console.log("After changinh num1");
+num1 = 45;
+console.log(num1, num2);                 // num1 is changed not num2  as both  variable  have separate memory to store values. Changing value of 1 would not affect the other one even though num2 was made to store the value that num1 stores
+
+
+// reference types(or more accurately their values) are stored in heap and the pointers(reference variable names) to those memory in heap are stored in a stack 
+let arr1 = ['item1', 'item2', 'item3'];
+let arr2 = arr1;                         // arr2 is assigned the same address as arr1 which means arr1 and arr2 although are stored as separate pointers ion stack but they point to the same memory in the heap. There is only one array in heap that is being pointed by both arr1 and arr2
+console.log(arr1, arr2);
+arr1.push(44);
+console.log("After pushing in arr1");
+console.log(arr1, arr2);                 // changes are shown in both 
+console.log(arr1===arr2);
+
+// cloning arrays - making a clone/copy of array which does not get affected when changes are made in array
+let arr3 = ['item1', 'item2', 'item3'];
+let arr4 = ['item1', 'item2', 'item3'];    // one way is to create values(that are same) separately for each array  but this works good for small arrays only 
+console.log(arr3===arr4);                 // for reference variables adresses are compared while using ===
+console.log(arr3, arr4);
+arr3.pop();
+console.log(arr3, arr4);
+//using slice() method for cloning (effective for large arrays)
+let arr5 = arr3.slice(0);       // This method creates a new array starting from the mentioned index to the last index of the array on which this function was applied. Since a new array is created, different space is reserved in heap for this new array
+console.log(arr3===arr5);
+console.log(arr3, arr5);
+arr3.pop();
+console.log(arr3, arr5);
+// concatenating an empty array with existing array using concat()
+let arr6 = [].concat(arr3);     // concat() creates a new array by adding the elements of the last array to the first
+console.log(arr3===arr6);
+// using spread operator
+let arr7 = [...arr3];          // ... denote spread operator it spreads the elemnts of arr3 in arr7
+console.log(arr3===arr7);
+// among all these using slice() gives is fastest
+
+// creating an array out of already existing array and adding some extra elements to it
+let arr8 = arr3.slice(0).concat("new item");
+console.log(arr8);
+let arr9 = [...arr3].concat("next new item");
+console.log(arr9);
+
+// array concatenation
+let arr10 = arr4.concat(arr8);     //using concat() method
+console.log(arr10);
+let arr11 = [...arr5, ...arr1];    //using spread function
+console.log(arr11);
+
+
+
+
+
+
