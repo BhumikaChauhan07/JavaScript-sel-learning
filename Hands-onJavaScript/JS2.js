@@ -119,8 +119,20 @@ console.log(arr10);
 let arr11 = [...arr5, ...arr1];    //using spread function
 console.log(arr11);
 
+//for loop  array to access elements of array
+let fruits = ["apple","mango","banana","grapes"]
+for(let i = 0;i< fruits.length; i++)
+{console.log(fruits[i]);}
 
+// using const for creating arrays - it is a better approach (not only for array but all reference types) as it saves from the errors assigning a new array to the reference name
+const numbers = [1,2,3,4];
+numbers.push(5);             // the new element gets pushed because the reference name used (numbers) actually stores the address of array which is not changed. the array is stored in heap and a value is pushed to array stored at the same adress
+console.log(numbers);  
+    //numbers = [1,2,3,4];   // this shows error as numbers is made to point to a new array hence the reference name is made to store a different address
 
-
-
-
+// while loop in array
+i = 0;
+while(i<numbers.length)
+{
+    console.log(numbers[i]);
+}
