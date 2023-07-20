@@ -135,4 +135,31 @@ i = 0;
 while(i<numbers.length)
 {
     console.log(numbers[i]);
+    i++;
 }
+
+// for of loop - it takes the elements of array one by one into an iterator variable
+for(let num of numbers)
+{console.log(num);}
+
+// for in loop - it stores the index of array elemets in variable one by one (variable hols  the index of current elemnted being iterated)
+console.log(fruits);
+for(let fruit in fruits)
+    console.log(fruit);
+// getting elements through for in loop
+for(let fruit in fruits)
+    console.log(fruits[fruit]);
+
+// array destructuring - used for storing individual elements of array into separete variables
+let [var1, var2, var3, var4, var5] = numbers;
+console.log(var1, var2, var3,var4,var5);
+// if array has more elements than the variables mentiooned then the variables will start storing from index 0 till the no. of variables created rest of the elements wont be saved in any variable
+// if array has less elements than no. of variables that we want to create, then remaining variables will be filled with undefined type
+[var1, var2, var3, var4, var5] = fruits
+console.log(var1, var2, var3,var4,var5);
+//if we don't want to save elements into variable in order and want to store the third element in 2nd variable then we can use ,
+[var1, ,var2, , var3] = fruits
+console.log(var1, var2, var3);
+// using array destructuring to store an array of elements 
+[var1,var2, ...var3] = fruits     // stores the remaining elements in var3
+console.log(var1, var2, var3);
