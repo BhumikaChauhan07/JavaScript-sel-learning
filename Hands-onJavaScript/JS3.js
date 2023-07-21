@@ -1,12 +1,14 @@
 //objects - they are used to represent real world entities, they store key value pairs and do not have index. Objects are reference types
 // memory allocation procedure is same for all reference types
 const person ={
-    name:"Bhumika", 
+    name:"Khushi", 
+    name:"Bhumika",                               //remember that one key can ocuur only once in an object however a value can repeat. Also if we make two keys of same name then the latest key(created after) will be referd by that key name
     age:20,
     hobbies: ["guitar","badminton","painting"]
 }                                                   //creating object
 console.log(person);
 console.log(typeof person);             // objects are also called object literal to differntiate it as all refernce types are objects
+
 
 // accessing data from objects
 console.log(person.name);               // the data members of objects are refered as properties of object
@@ -36,11 +38,77 @@ person[key] = "bhumikachauhan2002@gmail.com"         // we did not put it in dou
 console.log(person);
 console.log(person.email);
 
+// iterating object through for in loop
+for(let key in person)
+{
+    console.log(key);              // for getting keys
+}
+for(let key in person)
+{
+    console.log(person.key);          // this results in undefined because dot notation does not use the value stored in key but insteads searches for key itself as a property of the object   
+}
+for(let key in person)
+{
+    console.log(person[key]);      // for getting values of keys
+}
+for(let key in person)
+{
+    console.log(`${key} : ${person[key]}`);      // using template string to get key value pair
+}
+console.log("Anotherway of gettinhg string value pair");
+for(let key in person)
+{
+    console.log(key,":", person[key]);
+}
 
+// iterating object using Object.keys()
+console.log(Object.keys(person));         // gives an array of the keys
 
+// computed properties
+const key1 ="objkey1";
+const key2="objkey2";
+const value1 ="objvalue1";
+const value2 ="objvalue2";
+const obj = {
+    [key1] :value1,
+    [key2] :value2
+};
+console.log(obj);
+// another way
+    //obj[key1] = value1;
+    //obj[key2] = value2;
 
+// spread operator in object can be used for cloning
+// spread basically breaks an iterable entity(sucha as array , string, objects (numbers do not operate with it)) written in front of it, to its individiual elements like a string would be spread into individual letters, array into elements, etc
+const obj1 ={
+    key1: "val1 of obj1",
+    key2: "val2"
+};
+const obj2 ={
+    key1: "val1 of obj2",
+    key3: "val3",
+    key4: "val4"
+};
+let obj3 = obj1;
+console.log(obj1=== obj3);
+console.log(obj3);
+obj3 = {...obj1};
+console.log(obj1=== obj3);
+console.log(obj3);
+// note that if both the objects which are spread have the same key then the new object will have the key of object which is spread later
+obj3 ={...obj1, ...obj2};
+console.log(obj3);
+obj3 ={...obj2, ...obj1};
+console.log(obj3);
+obj3 ={...obj1, ...obj2, keyExtra :"newkey"};
+console.log(obj3);
 
-
+// if we don not provide any key  and directly spread an iterable then by default the respective index is treated as a key (although these numbers too are in string format)
+let obj4 = {..."abcde"}
+console.log(obj4);
+arr = ["p", "q", "r","s", "t"];
+obj4 = {...arr}
+console.log(obj4);
 
 
 
