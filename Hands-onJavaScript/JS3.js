@@ -110,9 +110,31 @@ arr = ["p", "q", "r","s", "t"];
 obj4 = {...arr}
 console.log(obj4);
 
+//object destructuring
+const band ={
+    bandName : "One-direction",
+    famousSong: "History",
+    year: 2001,
+    anotherSong : "Infinity"
+};
+const {bandName:var1, famousSong, ...restProperties}= band;      // while destructing object the variable name must exaclty match the property name by default but a colon can be used to create a new  variable name
+console.log(var1, famousSong);                                   // if colon is used then the new name (var1) will be used bandnName as a variable name now will give error
+console.log(restProperties);                                     // the remaining properties were stored in a new object resProperties using spread operator
 
+// objects inside array
+const users = [
+    {Name: "Bhumika", gender: "female", age: 20},
+    {Name: "Spraha", gender: "female", age: 21},
+    {Name: "Nishtha", gender: "female", age: 19},
+    {Name: "Shradha", gender: "female", age: 19}
+]
+console.log(users);
+for(let user of users)
+{console.log(user)};
 
-
-
-
-
+// nested destructuring
+let [user1,user2,...twinUsers] = users;            // this is normal array destructuring
+console.log(user1, user2,twinUsers);
+// i want specific info about users say the name of first user , gender of second and age of fourth user
+[{Name:User1Name},{gender:user2Gender}, ,{age:user4Age}] = users;       // nested destructuring
+console.log(User1Name, user2Gender, user4Age);
