@@ -98,3 +98,59 @@ console.log(third);                // since var is a function scope (and the js 
     console.log(fName);             // this uses the latest declaration 
 }
 // lexical environment is the just outside environment and lexical scope does not use variable (which is not present in the function/block)of inside environment (like a function or bloxk inside the current function /block) but if the variable is in inside environment id declared using var it is used because it follows the policy of declare anywhere and use anywhere in function scope
+
+// default parameters - used when parameters are not provided by the user
+function addNum(a=1,b=2){
+    return a+b;
+}
+console.log(addNum(3));
+console.log(addNum());
+
+// rest parameters - to take in extra/remaining parameters in call into  a single parameter
+function newFunc1(a,b,c){
+    console.log(`a is ${a}`);
+    console.log(`b is ${b}`);
+    console.log(`c is ${c}`);
+}
+newFunc1(1,2,3,4,5,6,7,8);      // now here it does not give the error that the number of parameters in call does not match with the no. of parameters in declaration. It prints the first 3 parameters
+function newFunc2(a,b,...c){    // using spread operator for taking remaining/rest parameters
+    console.log(`a is ${a}`);
+    console.log(`b is ${b}`);
+    console.log(`c is ${c}`);
+    console.log(Array.isArray(c));
+}
+newFunc2(1,2,3,4,5,6,7,8); 
+
+// parameter destructuring (used with objects taken as parameters)
+const person ={
+    fName: "Bhumika",
+    gender: "f"
+};
+function print({fName, gender})           // array destruicturing done in the parameter list itself
+{
+    console.log(fName);
+    console.log(gender);
+}
+print(person);
+
+// callback function - function as a parameter which is generally named callback (not compulsory though)
+function func1(val){
+    console.log(`Inside func1 value ${val}`);
+}
+function func2(callback){
+    callback();
+    callback(34);
+}
+func2(func1);
+
+// functions returning function
+function func3(){
+    function func4(){
+        console.log("Hello");
+    }
+    return func4;
+}
+console.log(func3());
+const func = func3();
+func()
+// function using call back functions, returning functions or taking functions as parameters are called higher order functions
