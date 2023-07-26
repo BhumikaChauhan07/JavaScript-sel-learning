@@ -111,7 +111,7 @@ person1 ={
     age: 20,
     sayHi: ()=>{console.log("hi! I am Bhumika");},
     refer1: function(){console.log(this);},    // using function() this gives current object
-    refer2: ()=>{console.log(this);}      //using arraow function gives info about global object
+    refer2: ()=>{console.log(this);}      //using arraow function uses object for this from its surrounding (here the surrounding is global object) which is one level outside where it is used
 }
 person1.sayHi();
 
@@ -163,6 +163,43 @@ function noGlobalObject()
     console.log(this);}
 noGlobalObject();      // this gives undefined instaed of window         
 
+// call function - it takes object as argument and is used to access the method of an object through another object 
+const listener1 = {
+    id: 24,
+    likedSong: "Chasing fire",
+    info: function(artist){
+        console.log(`user${this.id} likes song ${this.likedSong}, by artist ${artist}.`)
+    }
+}
+listener1.info("Lauv");
+const listener2 = {
+    id: 49,
+    likedSong: "Attention",   
+}
+listener1.info.call(listener2, "Chatlie Puth");         // if function has any arguments then they can also be passed in the call() after object
+// call() will work the same for a function which is defined independently 
+let rate = function(songRate){
+    console.log(`user${this.id} rates the song ${this.likedSong}, by ${songRate} stars.`)
+}
+rate.call(listener1, 4.2);              //syntax is changed to functionName.call(object, parameter) as it is an independent function
+// it can also be used with simple functions without passing anything in the call() - functionname.call(), it will run the same as functionName())
+// note that if info method was created using arrow function or rate was created using arrow function then passing another object in call() woul not change this from window/ global object to that  passed object 
 
+// apply function - it does the same thing as call function the difference is that it does not take separate arguments instead it takes an array for arguments
+rate = function(songRate, artist, artistRate){
+    console.log(`user${this.id} rates the song ${this.likedSong}, by ${songRate} stars ansd artist ${artist} by by ${artistRate} stars.`)
+}
+rate.apply(listener2, [3.2,"Charlie Puth", 4]); 
 
+// bind function - it is same as call function but instead of calling the function for object it returns that function so that it can be saved in variable and called in future
+const func1 = rate.bind(listener1,4,"Lauv", 4); 
+func1();
 
+// short syntax altyernate for methods of objects
+    // const listener1 = {
+    //     id: 24,
+    //     likedSong: "Chasing fire",
+    //     info(artist){
+    //         console.log(`user${this.id} likes song ${this.likedSong}, by artist ${artist}.`)
+    //     }
+    // }
