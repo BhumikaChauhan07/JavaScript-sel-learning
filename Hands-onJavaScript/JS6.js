@@ -90,7 +90,7 @@ const newObj = Object.assign({},obj2);
 console.log(obj2===newObj);
 
 // optional chaining in objects
-const person1 = {
+let person1 = {
     fName: "Bhumika",
     address: {hno : 123, colony: "civil lines"}
 };
@@ -103,5 +103,66 @@ console.log(person1.hobbies);         // if we try to access a non existing prop
 console.log(person1?.fName);   // the question mark denotes that proceed further only if pwerson 1 exists otherwise give undefined
 console.log(person1?.hobbies); 
 console.log(person1?.hobbies?.sports);     // now this doesn't give error because it proceeds further only if hobbies exist
+
+// methods - functions inside object
+person1 ={
+    id:1,
+    fname: "Bhumika",
+    age: 20,
+    sayHi: ()=>{console.log("hi! I am Bhumika");},
+    refer1: function(){console.log(this);},    // using function() this gives current object
+    refer2: ()=>{console.log(this);}      //using arraow function gives info about global object
+}
+person1.sayHi();
+
+// this keyword- it refers to the current object(the object which is in use currently during runtime) and we have to use it while accessing properties inside methods
+person1.about = function(){
+    console.log(`My name is ${this.fname}, my age is ${this.age}`);      // if we directly write fname and age instead of this.fname and thid.age then it wil show error saying fname and age not defined
+}
+person1.about();
+// this looks for values of properties during runtime and uses them
+person1.refer1();
+person1.refer2();
+function identity(){
+    console.log(`I am user${this.id}, ${this.fname} `)
+}
+identity();   // right now there is no current object using it so it gives undefined 
+let person2 ={
+    id:2,
+    fname: "Spraha",
+    age: 21,
+    sayHi: ()=>{console.log("hi! I am Spraha");}, 
+    about: identity,                             // used the above function as a method
+    refer: currentObject
+}
+let person3 ={
+    id:3,
+    fname: "Soham",
+    age: 20,
+    sayHi: ()=>{console.log("hi! I am Soham" );},
+    about: identity, 
+    refer: currentObject      
+}
+person2.about();              // the function accesses the name and id of object calling it(current object during runtime)
+person3.about();
+
+// global object
+console.log(this);              // javascript has a window object which is gloabal object provide by javascript itsef
+console.log(window);           // another way to use above statement
+console.log(this===window);
+function func(){
+    console.log("hello");
+}
+function currentObject()
+{console.log(this);}
+window.func();               // every function that we create becomes a part of global object
+currentObject();            // this is why the function also shows Window on this
+// using strict mode to avoid refering to global object while using this without any object
+function noGlobalObject()
+{   "use strict"
+    console.log(this);}
+noGlobalObject();      // this gives undefined instaed of window         
+
+
 
 
