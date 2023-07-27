@@ -169,10 +169,58 @@ class person{                                        // base class
 }
 const person1 = new person("Bhumika", 20, 567344272, 123456789);
 person1.identity();
-class student extends person{                  // subclass - it inherits everything from base class
+class stud extends person{                  // subclass - it inherits everything from base class
 
 }
-const stu1 = new student("khushi", 20, 9129044272, 5564233189);          // object or instance of subclass
+const stu1 = new stud("khushi", 20, 9129044272, 5564233189);          // object or instance of subclass
 stu1.identity();
 
+// super keyword - when we want to add new properties to subclass then, the inherited properties can be accessed by the constructor of base class so indorder to to that the super keyword is used
+class student extends person{  
+    constructor(name, age, adharid, mobno, sid, course){
+        super(name, age, adharid, mobno);
+        this.sid = sid;
+        this.course = course;
+    } 
+    identity(){
+        console.log(`My name is ${this.name} and i hold aadhar id - ${this.adharid} and sid- ${this.sid}`);}        // the same(name) function of parent class is modified in subclass and whenever called from an object of subclass, this one will be given preference
+    stuDetail(){
+        console.log(`My sid is ${this.sid} and I am enrolled in course ${this.course}`);
+    }           
+}
+const stu2 = new student("khshboo", 21, 444555666777, 7786543902,"R223459876", "AI/ML");
+stu2.stuDetail();
+stu2.identity();
 
+// getter - it is a method that returns the value of a propperty (note that a getter method always returns and it does not need to be called as obj.geterFunctionName(), it can be called as a property obj.geterFunctionName) 
+// setter - its is a method that is used to set value of properties( after they have been passed while creating object) nothing different just a function created with keyword set to change value which could also be changed directly (like getter setter can also be called to change value like changing value of properties)
+// both getter ans setter ,ethods can have the same name
+class Name{
+    static prop ="I belong to class";
+    constructor(fname, lname){
+        this.fname = fname;
+        this.lname = lname;
+    }
+    get fullname(){
+        return `${this.fname} ${this.lname}`;
+    } 
+    set fullname(fullname){
+        const[fname , lname=this.lname] = fullname.split(" ");         // performing a task(can be any way we want to set the values)- here it uses split method to separate the given string and set values
+        this.fname = fname;
+        this.lname = lname
+    }
+    static printHi(){
+        console.log(`Hi`);
+    }
+}
+const name1 = new Name("Rohan", 'Negi');
+console.log(name1.fullname);
+name1.fullname = "Vipul Chaudhary";
+console.log(name1.fullname);
+name1.fullname = "Drishti";
+console.log(name1.fullname);
+
+// static method and static properties - till now all the methods and properties were used through the name of object as separate copies of methods and properties was being created for separate object If we declare them static then there will be single copy belonging to class and the same copy being shared by all objects
+// these cannot be called using object instead they are called using class name. In the above class printname is a static method
+Name.printHi();    //static method
+console.log(Name.prop);  // static property
