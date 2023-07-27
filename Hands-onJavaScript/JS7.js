@@ -62,14 +62,49 @@ console.log(obj2.__proto__);      // the reference object is mentioned in  __pro
  // now if we have to add several such functions in the userMethods object then we need to create a variable for each of such function in the createUser function. To avoid this we can set the __proto__ of user object created in line 30 to userMethods
 // This can be done by replacing "const user ={};" with "const user = Object.create(userMethods);" and removing all the method declarations/ variables from it(line 36,37)
 
+// functions as objects - functions in javascript are functions but are also objects
+// name property of a funtion - tells function name
+function hello(){
+    console.log("Hello!");
+}
+console.log(hello.name);
+// adding a property in function
+hello.newProp = "hello world";       // added a key value pair
+console.log(hello.newProp);
 
+// functions provide us with empty object called prototype where key value pairs or properties can be added 
+console.log(hello.prototype);                // only functions provide prototype
+hello.prototype.abc ="abc";                 // adding property in prototype
+hello.prototype.func = function(){
+    console.log("inside prototype");
+}
+console.log(hello.prototype);
 
+// the function prototype of creatUser can be used instead of object UserMethods and createUser.prototype can be set as __proto__
 
+// new keyword - 1. it creates empty object this ={}, 2. it then returns this so there is no need to use return this in function, 3. does the work of Object.create(functionName.prototype) and sets the __proto__ for object as the function prototype
+function Table (tableOf){            
+    this.tableOf = tableOf;
+}
+Table.prototype.arr = [1,2,3,4,5,6,7,8,9,10];
+Table.prototype.calculateTable = function(){
+    for(num of this.arr){
+        console.log(`${this.tableOf} X ${num} = ${this.tableOf*num}`);
+    }
+}
+const tableOf3 = new Table(3);
+tableOf3.calculateTable();
+for(let key in tableOf3)             // here it tells all the properties including the ones in prototype
+{
+    console.log(key);
+}
+// by convention the name of constructor functions that will create objects using new are started with capital letter
 
-
-
-
-
+// hasOwnProperty() - returns a boolean value when a key is passed in it denoting whether the key belongs to the objects own property or not
+for(let key in tableOf3)             
+{
+    console.log(key, tableOf3.hasOwnProperty(key));
+}
 
 
 
