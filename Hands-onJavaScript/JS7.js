@@ -107,7 +107,72 @@ for(let key in tableOf3)
 }
 
 
+// prototypes in array
+// all the methods of arrays that we use are in the prototype
+console.log(Array.prototype);
+// when we create an array directly, nternally it is being created using new
 
+//arrays have their prototype in the form of array
+numbers =[1,2,3];
+console.log(Object.getPrototypeOf(numbers));     // another way
+console.log(Array.isArray(Array.prototype));     // prototype of array is an array itself
+console.log(Array.isArray(Object.getPrototypeOf(numbers)));
 
+// changing the default type of function prototype from object to array
+function hi()
+{
+    console.log("hiee");
+}
+console.log(hi.prototype);   // it is object right now
+hi.prototype = [];
+console.log(hi.prototype);   // changed to empty array, although this is of not as such any use
+
+// when there are a lot of functions to be added to the function prototype it becomes hectic to keep on adding keywalye pair in prototype for every new method so classes are used
+class user{
+    constructor(fname, lname, age, email, address){                      // used for creating object and returning then back
+        console.log("inside constructor");
+        this.firstName = fname;
+        this.lastName = lname;
+        this.age = age;
+        this.email = email;
+        this.address = address;
+    }
+    about(){                                               // functions that we were defining in prototype can be defined directly in class
+        console.log(`I am user ${this.firstName} ${this.lastName}.`)
+    }
+    is18(){
+        return this.age>=18
+    }
+}
+// all the objects are created using new keyword when classes are used to create objects because constructor is called when new is used
+const user1 = new user("Soham", "Bose", 21, "bose@gmail.com", "India...");
+console.log(user1);
+console.log(user1.firstName);
+user1.about();
+console.log(Object.getPrototypeOf(user1));
+// at the backend everything happens same as happened when constructor function was used
+
+// inheritance - for resuing classes so that we do not have to rewrite same things againa and again 
+class person{                                        // base class
+    constructor(name, age, adharid, mobno){
+        this.name = name;
+        this.age = age;
+        this.adharid = adharid;
+        this.mobno = mobno;
+        
+    }
+    identity(){
+        console.log(`My name is ${this.name} and i hold aadhar id - ${this.adharid}`);}
+    personalDetail(){
+        console.log(`My age is ${this.age} and mobile no. is ${this.mobno}`);
+    }
+}
+const person1 = new person("Bhumika", 20, 567344272, 123456789);
+person1.identity();
+class student extends person{                  // subclass - it inherits everything from base class
+
+}
+const stu1 = new student("khushi", 20, 9129044272, 5564233189);          // object or instance of subclass
+stu1.identity();
 
 
