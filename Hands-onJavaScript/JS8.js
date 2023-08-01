@@ -45,3 +45,36 @@ let variable1 = 2;      // although let and const are also hoisted (variable exi
 // Temporal dead zone(TDZ) -  time period till which a variable remains uniniitialized, it remains in temporal dead zone 
 // NOTE : if some variable does not exist typeof gives value undefined as we are trying to check the type of something that does not exist
 
+// JS maintains a call stack that determines which execution context is being refferd to currently (there is global execution context and there can be multiple local execution contexts depending on scopes defined during compilation). Call stack has tracker to know which line of code is being currently executed during execution phase
+// note that all variables are initialized during run time
+// function execution context - whenever a function is called(during runtime/ execution phase) in javascript, a new execution context is created and that is called function execution context and it again has two parts memory creation phase(local) and the code execution phase
+// when the local memory creation activates, first of all all the arguments of the function are stored in an array like object(that has index and length property) and then the parameters of function are assigned the value of arguments passed. After this all the local variables are created in local memory(rules/ method being same as GEC memomry creation for all local variables and functions if any) and then code execution starts
+
+// lets analyse following snippet
+let foo= "foo";                                            //1
+console.log(foo);                                          //2
+function getfullname(fname, lname){                        //3
+    console.log(arguments);                                //4
+    let myvar = "var in func";                             //5
+    console.log(myvar);                                    //6
+    const fullname = fname + " " +lname;                   //7
+    return fullname;                                       //8
+}                                                       
+const personname = getfullname("Bhumika", "Chauhan");      //9
+console.log(personname);                                   //10
+// execution context 
+// GEC is created and pushed in call stack
+// global memory creation in GEC(execution has not started yet) - this is set to window, foo( created): uninitialized, getfullname is stored, personnname(created) :uinitialized
+// code execution phase - line 1: foo = "foo"
+//                        line 2: displays foo on console
+//                        line 3: a function is encountered so function execution context is created and pushed into call stack on top of FEC
+//                                local memory creation in FEC(execution not started yet)- arguments are stored in array like objects named arguments from call(note that entire code is already analysed): ["Bhumika", "Chauhan"], parameters are assigned value of arguments: fname ="Bhumika", lname = "Chauhan", myvar(created): uninitialized, fullname(created): uninitialized
+//                                code execution phase - line 4: displays arguments 
+//                                                       line 5: myvar ="var in func"
+//                                                       line 6: displays var in func on console
+//                                                       line 7: fullname = "Bhumika Chauhan"
+//                                                       line 8: fullname returned
+//                                FEC popped out of call stack, jumps to GEC code execution phase
+//                        line 9: personname ="Bhumika Chauhan"
+//                        line 10: displays Bhumika Chauhan on console
+// GEC popped out of call stack
