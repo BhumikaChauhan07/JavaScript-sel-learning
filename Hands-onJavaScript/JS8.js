@@ -67,14 +67,53 @@ console.log(personname);                                   //10
 // global memory creation in GEC(execution has not started yet) - this is set to window, foo( created): uninitialized, getfullname is stored, personnname(created) :uinitialized
 // code execution phase - line 1: foo = "foo"
 //                        line 2: displays foo on console
-//                        line 3: a function is encountered so function execution context is created and pushed into call stack on top of FEC
-//                                local memory creation in FEC(execution not started yet)- arguments are stored in array like objects named arguments from call(note that entire code is already analysed): ["Bhumika", "Chauhan"], parameters are assigned value of arguments: fname ="Bhumika", lname = "Chauhan", myvar(created): uninitialized, fullname(created): uninitialized
+//                      nothing to execute from line 3 to 8 rn
+//                        line 9: function getfullname is called. A function call is encountered so function execution context is created and pushed into call stack on top of FEC
+//                                line 3: local memory creation in FEC(execution not started yet)- arguments are stored in array like objects named arguments from call(note that entire code is already analysed): ["Bhumika", "Chauhan"], parameters are assigned value of arguments: fname ="Bhumika", lname = "Chauhan", myvar(created): uninitialized, fullname(created): uninitialized
 //                                code execution phase - line 4: displays arguments 
 //                                                       line 5: myvar ="var in func"
 //                                                       line 6: displays var in func on console
 //                                                       line 7: fullname = "Bhumika Chauhan"
 //                                                       line 8: fullname returned
 //                                FEC popped out of call stack, jumps to GEC code execution phase
-//                        line 9: personname ="Bhumika Chauhan"
+//                                personname ="Bhumika Chauhan"
 //                        line 10: displays Bhumika Chauhan on console
 // GEC popped out of call stack
+
+// lexical environment and scope chain
+const lastname = "Dutt";
+const printname = function(){
+    const firstname ="Riya";
+    console.log(firstname);
+    console.log(lastname);              // note that here FEC is created during/inside the code execution phase of GEC, so the variables which are not present in FEC kocal memory are found by jumping to one level outside in its lexical environment till the variable is encountered or till GEC is reached
+}
+printname();
+
+// closures - when function returns another function along with the lexical environment of the returned function. If this was not done then the local parameters would vanish when FEC for printFullIdentity will be popped and printIdentity will not be able to use those local parameter
+function printFullIdentity(fn,ln){                            //1
+    function printIdentity(){                                 //2
+        console.log(fn, ln);                                  //3
+    }
+    return printIdentity ;                                    //4
+}
+const value = printFullIdentity("Abhijeet", "Roy");           //5
+value();                                                      //6
+// execution context 
+// GEC is created and pushed in call stack
+// global memory creation in GEC(execution has not started yet) - this is set to window, printFullIdentity is stored, value(created) :uinitialized
+// code execution phase - nothing to execute from line 1 to 4 rn
+//                        line 5: function printFullidentity is called. A function call is encountered so function execution context is created and pushed into call stack on top of FEC
+//                                A function is encountered so function execution context is created and pushed into call stack on top of FEC
+//                                local memory creation in FEC(execution not started yet)- arguments are stored in array like objects named arguments from call(note that entire code is already analysed): ["Abhijeet", "Roy"], parameters are assigned value of arguments: fn ="Abhijeet", ln = "Roy", printIdentity is stored in local memory(it has no parameters)
+//                                code execution phase - nothing to execute from line 2 to 3 rn
+//                                                       line 4: function printIdentity is returned along with the local parameters of printFullIdentity function because JS knows those are used by printIdentity(these are called closures- when function returns another function along with its own parameters)(if this was not done then the local parameters would vanish when FEC for printFullIdentity will be popped and printIdentity will not be able to use those local parameter), value = printIdentity function + fn + ln
+//                                FEC popped out of call stack, jumps to GEC code execution phase ( along with this the local memory created for that function is also gone all the local variables, functions, everything in local)
+//                        line 6: function prIntidentity is called through value. A function call is encountered so function execution context is created and pushed into call stack on top of FEC
+//                                A function is encountered so function execution context is created and pushed into call stack on top of FEC
+//                                local memory creation in FEC(execution not started yet)- arguments are not passed and there are no parameters so arguments
+//                                 code execution phase - line 3: (fn , ln not found in srguments object or local memory but are found in golabl memory in value)
+//                                                                displays Abhijeet Roy on console
+//                                FEC popped out of call stack, jumps to GEC code execution phase
+// GEC popped out of call stack
+
+
