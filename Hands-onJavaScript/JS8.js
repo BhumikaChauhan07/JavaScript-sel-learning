@@ -116,4 +116,20 @@ value();                                                      //6
 //                                FEC popped out of call stack, jumps to GEC code execution phase
 // GEC popped out of call stack
 
-
+// application of closure - tracking if a function has already been called
+function track(){
+    let counter = 0;
+    return function(){
+        if(counter<1){
+            console.log("First call");
+            counter++ ;
+        }
+        else{
+            console.log(`Already been called`);
+        }
+    }
+}
+const calling = track();
+calling();
+calling();
+calling();
